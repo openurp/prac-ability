@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orm>
+  <mapping class="org.openurp.prac.ability.model.DefaultMapping" name="prac.ability"/>
+  <naming>
+    <profile package="org.openurp.prac" pluralize="true" schema="prac">
+      <annotation class="org.beangle.data.model.annotation.config" schema="cfg" prefix="prac_"/>
+      <annotation class="org.beangle.data.model.annotation.log" schema="log" prefix="prac_"/>
+    </profile>
+  </naming>
+</orm>

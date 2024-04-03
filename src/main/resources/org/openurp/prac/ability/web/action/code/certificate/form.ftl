@@ -1,0 +1,23 @@
+[#ftl]
+[@b.head/]
+[@b.toolbar title="修改证书"]bar.addBack();[/@]
+[@b.tabs]
+  [@b.form action=b.rest.save(certificate) theme="list"]
+    [@b.textfield name="certificate.code" label="代码" value="${certificate.code!}" required="true" maxlength="20"/]
+    [@b.textfield name="certificate.name" label="名称" value="${certificate.name!}" required="true" maxlength="40" style="width:300px"/]
+    [@b.textfield name="certificate.enName" label="英文名" value="${certificate.enName!}" maxlength="100"/]
+    [@b.textfield name="certificate.institutionCode" label="发证机构代码" value=certificate.institutionCode! maxlength="100" /]
+    [@b.textfield name="certificate.institutionName" label="发证机构名称" value=certificate.institutionName! maxlength="100" style="width:300px"/]
+    [@b.select name="certificate.category.id" label="证书类型" value=(certificate.category.id)!
+               style="width:200px;" items=categories empty="..." required="true"/]
+    [@b.textarea name="certificate.subjects" label="证书内课程" value=certificate.subjects rows="5" cols="50" comment="每行一个"/]
+    [@b.startend label="有效期"
+      name="certificate.beginOn,certificate.endOn" required="true,false"
+      start=certificate.beginOn end=certificate.endOn format="date"/]
+    [@b.textfield name="certificate.remark" label="备注" value="${certificate.remark!}" maxlength="3"/]
+    [@b.formfoot]
+      [@b.reset/]&nbsp;&nbsp;[@b.submit value="action.submit"/]
+    [/@]
+  [/@]
+[/@]
+[@b.foot/]

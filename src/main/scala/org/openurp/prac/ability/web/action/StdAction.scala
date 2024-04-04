@@ -120,6 +120,7 @@ class StdAction extends StudentSupport with EntityAction[AbilityCreditApply] {
       apply.auditDepart = if (setting.collegeReviewRequired) std.department else setting.auditDepart.getOrElse(std.department)
       apply.auditOpinion = None
 
+      apply.credits = if (apply.finished) setting.credits else 0.5f
       val parts = getAll("attachment", classOf[Part])
       if (parts.nonEmpty && null != parts.head && parts.head.getSize > 0) {
         val repo = EmsApp.getBlobRepository(true)

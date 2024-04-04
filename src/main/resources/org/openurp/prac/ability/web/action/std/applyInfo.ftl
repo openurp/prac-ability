@@ -10,7 +10,7 @@
       <td>${(std.updatedAt?string("yyyy-MM-dd HH:mm"))!}</td>
     </tr>
     <tr>
-      <td class="title">获得日期：</td>
+      <td class="title">获得年月：</td>
       <td>${apply.acquiredOn}</td>
       <td class="title">证书编号：</td>
       <td>${apply.certificateNo!}</td>
@@ -27,7 +27,7 @@
       <td class="title">审核部门：</td>
       <td>${(apply.auditDepart.name)!}</td>
       <td class="title">认定学分：</td>
-      <td>[#if apply.status=="通过"]${apply.credits!}[#else]尚未审核通过[/#if]</td>
+      <td>${apply.credits}分</td>
     </tr>
     <tr>
       <td class="title">申请说明：</td>

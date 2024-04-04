@@ -42,7 +42,7 @@ class AbilityCreditApply extends LongId with Updated {
   var finished: Boolean = _
   /** 证书编号 */
   var certificateNo: Option[String] = None
-  /** 获得日期 */
+  /** 获得年月 */
   var acquiredOn: YearMonth = _
   /** 申请理由 */
   var reasons: Option[String] = None
@@ -53,5 +53,5 @@ class AbilityCreditApply extends LongId with Updated {
   /** 申请状态 */
   var status: AuditStatus = AuditStatus.Draft
   /** 认定的学分数 */
-  var credits: Option[Float] = None
+  var credits: Float = _
 }

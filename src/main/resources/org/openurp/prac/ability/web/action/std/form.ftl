@@ -4,6 +4,8 @@
     bar.addBack();
   [/@]
 <div class="container" style="width:95%">
+[#include "step.ftl"/]
+[@displayStep ['填写认定信息','辅导员(${(apply.std.state.squad.mentor.name)!"无"})审核','${apply.std.department.name}审核','教务处复审'] 0/]
   [@b.card]
     [@b.card_header]<h5> 能力素质拓展课学分认定申请(${apply.certificate.name})</h5>[/@]
     [@b.card_body]
@@ -21,13 +23,14 @@
         [@b.textfield name="apply.subjects" maxlength="100" label="通过课程" required="true" value=apply.subjects!
            style="width:200px" comment=setting.certificate.subjects placeholder="全部完成可以填写全部"/]
         [@b.date label="获得年月" name="apply.acquiredOn" value=apply.acquiredOn! required="true" format="yyyy-MM"
-               placeholder="最后一门或得年月或者证书获得年月" comment="最后一门获得年月 / 证书获得年月" /]
+               placeholder="证书课程获得年月/证书获得年月" comment="证书课程获得年月/证书获得年月" /]
         [#if setting.certificate.subjects??]
           [@b.textfield name="apply.certificateNo" label="证书编号" value=apply.certificateNo! maxlength="100" required="false" comment="按照课程认定时选填"/]
         [#else]
           [@b.textfield name="apply.certificateNo" label="证书编号" value=apply.certificateNo! maxlength="100" required="true" /]
         [/#if]
 
+        [@b.field label="学分规则"]按课程认定0.5学分，按证书认定1学分。多门课程，需要分开申请，每次0.5分，上限1学分。[/@]
         [@b.field label="证明材料" required="true"]
          <input type="file" name="attachment">
          [#if apply.attachmentPath??]已上传[/#if]

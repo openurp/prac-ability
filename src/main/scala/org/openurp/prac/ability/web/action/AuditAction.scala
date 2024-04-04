@@ -78,7 +78,6 @@ class AuditAction extends RestfulAction[AbilityCreditApply] with ProjectSupport 
       msg = s"${Securities.user}驳回了${apply.std.code}的认定申请"
     }
 
-    apply.credits = getFloat("credits")
     apply.auditOpinion = get("auditOpinion")
     entityDao.saveOrUpdate(apply)
     businessLogger.info(msg, apply.id, Map("auditOpinion" -> apply.auditOpinion))

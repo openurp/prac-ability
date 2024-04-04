@@ -59,7 +59,7 @@ class ExternCourseGradeSyncServiceImpl extends ExternCourseGradeSyncService, Ini
         "semester_id,std_id,course_id,course_take_type_id,course_type_id,exam_mode_id,free_listening,score_text)" +
         " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         id, 1, 2, Instant.now, 1, std.project.id,
-        semester.id, std.id, course.id, CourseTakeType.Exemption, course.courseType.id, 1, 1, "免修")
+        semester.id, std.id, course.id, 1, course.courseType.id, 1, 1, "合格")
       id
     } else {
       0

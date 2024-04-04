@@ -55,7 +55,7 @@ class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport
     val query = super.getQueryBuilder
     query.where("apply.std.project=:project", project)
     query.where("apply.status in :statusList", statuses)
-    query.where("apply.std.state.squad.mentor.staff.code=:code", Securities.user)
+    query.where("apply.std.state.squad.mentor.code=:code", Securities.user)
     query
   }
 
@@ -80,7 +80,6 @@ class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport
       msg = s"${Securities.user}驳回了${apply.std.code}的认定申请"
     }
 
-    apply.credits = getFloat("credits")
     apply.auditOpinion = get("auditOpinion")
     entityDao.saveOrUpdate(apply)
     businessLogger.info(msg, apply.id, Map("auditOpinion" -> apply.auditOpinion))

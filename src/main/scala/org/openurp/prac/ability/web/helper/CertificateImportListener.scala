@@ -18,7 +18,7 @@
 package org.openurp.prac.ability.web.helper
 
 import org.beangle.data.dao.{EntityDao, OqlBuilder}
-import org.beangle.data.transfer.importer.{ImportListener, ImportResult}
+import org.beangle.doc.transfer.importer.{ImportListener, ImportResult}
 import org.openurp.base.edu.model.{Course, CourseLevel}
 import org.openurp.base.model.Project
 import org.openurp.code.edu.model.Certificate

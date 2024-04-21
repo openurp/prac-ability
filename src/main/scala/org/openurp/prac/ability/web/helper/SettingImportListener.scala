@@ -19,7 +19,7 @@ package org.openurp.prac.ability.web.helper
 
 import org.beangle.commons.lang.Strings
 import org.beangle.data.dao.EntityDao
-import org.beangle.data.transfer.importer.{ImportListener, ImportResult}
+import org.beangle.doc.transfer.importer.{ImportListener, ImportResult}
 import org.openurp.base.edu.model.Major
 import org.openurp.base.model.Department
 import org.openurp.prac.ability.model.{AbilityCreditConfig, AbilityCreditSetting}

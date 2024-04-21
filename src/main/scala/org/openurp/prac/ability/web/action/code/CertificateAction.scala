@@ -19,9 +19,9 @@ package org.openurp.prac.ability.web.action.code
 
 import org.beangle.commons.activation.MediaTypes
 import org.beangle.data.dao.OqlBuilder
-import org.beangle.data.excel.schema.ExcelSchema
-import org.beangle.data.transfer.importer.ImportSetting
-import org.beangle.data.transfer.importer.listener.ForeignerListener
+import org.beangle.doc.excel.schema.ExcelSchema
+import org.beangle.doc.transfer.importer.ImportSetting
+import org.beangle.doc.transfer.importer.listener.ForeignerListener
 import org.beangle.web.action.annotation.response
 import org.beangle.web.action.view.Stream
 import org.beangle.webmvc.support.action.{ImportSupport, RestfulAction}

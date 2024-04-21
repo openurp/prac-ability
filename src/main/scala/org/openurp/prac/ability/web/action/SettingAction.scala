@@ -18,9 +18,9 @@
 package org.openurp.prac.ability.web.action
 
 import org.beangle.commons.activation.MediaTypes
-import org.beangle.data.excel.schema.ExcelSchema
-import org.beangle.data.transfer.importer.ImportSetting
-import org.beangle.data.transfer.importer.listener.ForeignerListener
+import org.beangle.doc.excel.schema.ExcelSchema
+import org.beangle.doc.transfer.importer.ImportSetting
+import org.beangle.doc.transfer.importer.listener.ForeignerListener
 import org.beangle.ems.app.Ems
 import org.beangle.web.action.annotation.{ignore, response}
 import org.beangle.web.action.view.{Stream, View}

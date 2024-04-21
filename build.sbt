@@ -1,4 +1,3 @@
-import org.openurp.parent.Dependencies.*
 import org.openurp.parent.Settings.*
 
 ThisBuild / organization := "org.openurp.prac.ability"
@@ -23,10 +22,10 @@ ThisBuild / developers := List(
 ThisBuild / description := "OpenURP Prac Ability"
 ThisBuild / homepage := Some(url("http://openurp.github.io/prac-ability/index.html"))
 
-val apiVer = "0.37.4-SNAPSHOT"
-val starterVer = "0.3.28-SNAPSHOT"
-val baseVer = "0.4.21-SNAPSHOT"
-val eduCoreVer = "0.2.1-SNAPSHOT"
+val apiVer = "0.38.1"
+val starterVer = "0.3.31"
+val baseVer = "0.4.23"
+val eduCoreVer = "0.2.2"
 val openurp_edu_api = "org.openurp.edu" % "openurp-edu-api" % apiVer
 val openurp_edu_core = "org.openurp.edu" % "openurp-edu-core" % eduCoreVer
 val openurp_stater_web = "org.openurp.starter" % "openurp-starter-web" % starterVer
@@ -37,6 +36,6 @@ lazy val root = (project in file("."))
   .settings(
     name := "openurp-prac-ability-webapp",
     common,
-    libraryDependencies ++= Seq(openurp_edu_api, openurp_stater_web, openurp_base_tag, openurp_edu_core, beangle_serializer_text),
+    libraryDependencies ++= Seq(openurp_edu_api, openurp_stater_web, openurp_base_tag, openurp_edu_core),
     libraryDependencies ++= Seq(openurp_stater_web, openurp_base_tag)
   )

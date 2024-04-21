@@ -19,12 +19,11 @@ package org.openurp.prac.ability.service.impl
 
 import org.beangle.commons.bean.Initializing
 import org.beangle.commons.logging.Logging
-import org.beangle.data.jdbc.query.JdbcExecutor
+import org.beangle.jdbc.query.JdbcExecutor
 import org.beangle.ems.app.datasource.AppDataSourceFactory
 import org.openurp.base.edu.model.Course
 import org.openurp.base.model.Semester
 import org.openurp.base.std.model.Student
-import org.openurp.code.edu.model.CourseTakeType
 import org.openurp.prac.ability.service.ExternCourseGradeSyncService
 
 import java.time.Instant
@@ -56,10 +55,10 @@ class ExternCourseGradeSyncServiceImpl extends ExternCourseGradeSyncService, Ini
       val rs = jdbcExecutor.query("select urp.next_id('edu_grade.course_grades') from dual")
       val id = rs.head(0).asInstanceOf[Number].longValue()
       jdbcExecutor.update("insert into edu_grade.course_grades(id,passed,status,updated_at,mark_style_id,project_id," +
-        "semester_id,std_id,course_id,course_take_type_id,course_type_id,exam_mode_id,free_listening,score_text)" +
-        " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        "semester_id,std_id,course_id,course_take_type_id,course_type_id,exam_mode_id,free_listening,gp,score,score_text)" +
+        " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", //16
         id, 1, 2, Instant.now, 1, std.project.id,
-        semester.id, std.id, course.id, 1, course.courseType.id, 1, 1, "合格")
+        semester.id, std.id, course.id, 1, course.courseType.id, 1, 1, 4.0f, 100f, "100")
       id
     } else {
       0

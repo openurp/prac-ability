@@ -12,7 +12,7 @@
           [@b.col property="eduType.name" title="培养类型" width="10%"/]
           [@b.col property="beginAt" title="开放时间"  width="25%"]${config.beginAt?string("yyyy-MM-dd HH:mm")}~${config.endAt?string("yyyy-MM-dd HH:mm")}[/@]
           [@b.col title="认定证书"]${config.settings?size}种[/@]
-          [@b.col title="要求学分"]${config.credits}[/@]
+          [@b.col title="要求学分"]${config.credits!}[/@]
       [/@]
   [/@]
 [@b.form name="configListForm" action="!search"][/@]

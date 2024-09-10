@@ -36,6 +36,8 @@ class AbilityCreditApply extends LongId with Updated {
   var certificate: Certificate = _
   /** 审核部门 */
   var auditDepart: Department = _
+  /** 通过门数，-1表示全部通过 */
+  var subjectCnt: Option[Int] = None
   /** 证书内课程 */
   var subjects: String = _
   /** 是否完成证书所有课程 */
@@ -53,5 +55,5 @@ class AbilityCreditApply extends LongId with Updated {
   /** 申请状态 */
   var status: AuditStatus = AuditStatus.Draft
   /** 认定的学分数 */
-  var credits: Float = _
+  var credits: Option[Float] = None
 }

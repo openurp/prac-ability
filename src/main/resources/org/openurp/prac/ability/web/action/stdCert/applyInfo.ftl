@@ -25,9 +25,7 @@
         [#else]--[/#if]
       </td>
       <td class="title">审核部门：</td>
-      <td>${(apply.auditDepart.name)!}</td>
-      <td class="title">认定学分：</td>
-      <td>${apply.credits!}分</td>
+      <td colspan="3">${(apply.auditDepart.name)!}</td>
     </tr>
     <tr>
       <td class="title">申请说明：</td>

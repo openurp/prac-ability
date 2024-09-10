@@ -3,6 +3,8 @@
 [@b.grid items=applies var="apply"]
     [@b.gridbar]
       bar.addItem("单个审核",action.single('auditForm'));
+      bar.addItem("批量同意",action.multi('batchAudit',"确认审核通过？","&passed=1"));
+      bar.addItem("批量驳回",action.multi('batchAudit',"确认审核不通过，驳回到学生重修修改?","&passed=0"));
     [/@]
     [@b.row]
         [@b.boxcol/]

@@ -20,7 +20,7 @@ package org.openurp.prac.ability.service.impl
 import org.beangle.commons.bean.Initializing
 import org.beangle.commons.logging.Logging
 import org.beangle.jdbc.query.JdbcExecutor
-import org.beangle.ems.app.datasource.AppDataSourceFactory
+import org.beangle.ems.app.dao.AppDataSourceFactory
 import org.openurp.base.edu.model.Course
 import org.openurp.base.model.Semester
 import org.openurp.base.std.model.Student
@@ -58,7 +58,7 @@ class ExternCourseGradeSyncServiceImpl extends ExternCourseGradeSyncService, Ini
         "semester_id,std_id,course_id,course_take_type_id,course_type_id,exam_mode_id,free_listening,gp,score,score_text)" +
         " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", //16
         id, 1, 2, Instant.now, 1, std.project.id,
-        semester.id, std.id, course.id, 1, course.courseType.id, 1, 1, 4.0f, 100f, "100")
+        semester.id, std.id, course.id, 1, course.courseType.get.id, 1, 1, 4.0f, 100f, "100")
       id
     } else {
       0

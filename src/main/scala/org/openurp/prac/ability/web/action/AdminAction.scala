@@ -28,6 +28,8 @@ import org.openurp.prac.ability.model.AbilityCreditApply
 import org.openurp.prac.ability.service.AbilityCreditApplyService
 import org.openurp.starter.web.support.ProjectSupport
 
+/** 教务处备案审核
+ */
 class AdminAction extends RestfulAction[AbilityCreditApply] with ProjectSupport {
 
   protected override def simpleEntityName: String = "apply"
@@ -36,7 +38,7 @@ class AdminAction extends RestfulAction[AbilityCreditApply] with ProjectSupport 
   var abilityCreditApplyService: AbilityCreditApplyService = _
 
   private val statuses = List(AuditStatus.Submited, AuditStatus.PassedByDepart, AuditStatus.RejectedByDepart,
-    AuditStatus.PassedByMentor, AuditStatus.RejectedByMentor,
+    AuditStatus.PassedByDepartTrial, AuditStatus.RejectedByDepartTrial,
     AuditStatus.Passed, AuditStatus.Rejected)
 
   override protected def indexSetting(): Unit = {

@@ -75,7 +75,7 @@ class AbilityCreditApplyServiceImpl extends AbilityCreditApplyService {
 
   private def autoStatCredit(std: Student): AbilityCredit = {
     val applies = entityDao.findBy(classOf[AbilityCreditApply], "std" -> std, "status" -> Passed)
-    val credits = applies.map(_.credits).sum
+    val credits = applies.map(_.credits.getOrElse(0f)).sum
     val abilityCredit = entityDao.findBy(classOf[AbilityCredit], "std", std).headOption.getOrElse(new AbilityCredit(std))
     abilityCredit.credits = credits
     abilityCredit.updatedAt = Instant.now

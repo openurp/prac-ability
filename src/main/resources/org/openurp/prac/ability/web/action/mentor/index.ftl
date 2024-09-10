@@ -1,6 +1,6 @@
 [#ftl]
 [@b.head/]
-[@b.toolbar title="能力素质拓展学分辅导员审核"/]
+[@b.toolbar title="能力素质拓展课学院初审"/]
 <div class="search-container">
   <div class="search-panel">
       [@b.form name="applysearchForm" action="!search" title="ui.searchForm" target="applyList" theme="search"]

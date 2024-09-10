@@ -23,12 +23,13 @@ import org.beangle.ems.app.web.WebBusinessLogger
 import org.beangle.security.Securities
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.RestfulAction
+import org.openurp.base.hr.model.Staff
 import org.openurp.base.model.{AuditStatus, Project}
 import org.openurp.code.edu.model.Certificate
 import org.openurp.prac.ability.model.AbilityCreditApply
 import org.openurp.starter.web.support.ProjectSupport
 
-/** 辅导员查看和审核申请
+/** 辅导员（学院初审）查看和审核申请
  */
 class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport {
 
@@ -36,8 +37,7 @@ class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport
 
   var businessLogger: WebBusinessLogger = _
 
-  private val statuses = List(AuditStatus.Submited, AuditStatus.PassedByMentor, AuditStatus.RejectedByMentor,
-    AuditStatus.PassedByDepart, AuditStatus.RejectedByDepart, AuditStatus.Passed)
+  private val statuses = List(AuditStatus.Submited, AuditStatus.PassedByDepartTrial, AuditStatus.RejectedByDepartTrial)
 
   override protected def indexSetting(): Unit = {
     put("statuses", statuses)
@@ -55,17 +55,28 @@ class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport
     val query = super.getQueryBuilder
     query.where("apply.std.project=:project", project)
     query.where("apply.status in :statusList", statuses)
-    query.where("apply.std.state.squad.mentor.code=:code", Securities.user)
-    query
+    val departs = getDeparts
+    if(departs.isEmpty){
+      val staffs = entityDao.findBy(classOf[Staff], "code" -> Securities.user, "school" -> project.school)
+      if staffs.isEmpty then query.where("apply.id <0")
+      else query.where("apply.std.state.squad.mentor=:mentor", staffs.head)
+    }else{
+      query.where("apply.std.state.department in(:departs)", departs)
+    }
+     query
   }
 
   def auditForm(): View = {
     val apply = getEntity(classOf[AbilityCreditApply], "apply")
     put("apply", apply)
-    put("editables", Set(AuditStatus.Submited, AuditStatus.PassedByMentor, AuditStatus.RejectedByMentor))
+    put("editables", auditableStatuses)
     val repo = EmsApp.getBlobRepository(true)
     put("attachmentPath", repo.url(apply.attachmentPath))
     forward()
+  }
+
+  private def auditableStatuses: Set[AuditStatus] = {
+    Set(AuditStatus.Submited, AuditStatus.PassedByDepartTrial, AuditStatus.RejectedByDepartTrial)
   }
 
   def audit(): View = {
@@ -73,10 +84,10 @@ class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport
     val passed = getBoolean("passed", false)
     var msg: String = null
     if (passed) {
-      apply.status = AuditStatus.PassedByMentor
+      apply.status = AuditStatus.PassedByDepartTrial
       msg = s"${Securities.user}审批通过了${apply.std.code}的认定申请"
     } else {
-      apply.status = AuditStatus.RejectedByMentor
+      apply.status = AuditStatus.RejectedByDepartTrial
       msg = s"${Securities.user}驳回了${apply.std.code}的认定申请"
     }
 
@@ -86,4 +97,27 @@ class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport
     redirect("search", "审批完成")
   }
 
+  /** 批量审核
+   *
+   * @return
+   */
+  def batchAudit(): View = {
+    val applies = entityDao.find(classOf[AbilityCreditApply], getLongIds("apply"))
+    val passed = getBoolean("passed", false)
+    applies foreach { apply =>
+      if (auditableStatuses.contains(apply.status)) {
+        var msg: String = null
+        if (passed) {
+          apply.status = AuditStatus.PassedByDepartTrial
+          msg = s"${Securities.user}审批通过了${apply.std.code}的认定申请"
+        } else {
+          apply.status = AuditStatus.RejectedByDepartTrial
+          msg = s"${Securities.user}驳回了${apply.std.code}的认定申请"
+        }
+        businessLogger.info(msg, apply.id, Map.empty)
+        entityDao.saveOrUpdate(apply)
+      }
+    }
+    redirect("search", "审批完成")
+  }
 }

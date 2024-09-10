@@ -28,14 +28,15 @@ import org.openurp.code.edu.model.Certificate
 import org.openurp.prac.ability.model.AbilityCreditApply
 import org.openurp.starter.web.support.ProjectSupport
 
+/** 学院审核申请
+ */
 class AuditAction extends RestfulAction[AbilityCreditApply] with ProjectSupport {
 
   protected override def simpleEntityName: String = "apply"
 
   var businessLogger: WebBusinessLogger = _
 
-  private val statuses = List(AuditStatus.Submited, AuditStatus.PassedByMentor, AuditStatus.PassedByDepart,
-    AuditStatus.RejectedByDepart, AuditStatus.Passed)
+  private val statuses = List(AuditStatus.PassedByDepartTrial, AuditStatus.PassedByDepart, AuditStatus.RejectedByDepart, AuditStatus.Passed)
 
   override protected def indexSetting(): Unit = {
     put("statuses", statuses)
@@ -60,10 +61,15 @@ class AuditAction extends RestfulAction[AbilityCreditApply] with ProjectSupport 
   def auditForm(): View = {
     val apply = getEntity(classOf[AbilityCreditApply], "apply")
     put("apply", apply)
-    put("editables", Set(AuditStatus.Submited, AuditStatus.PassedByDepart, AuditStatus.RejectedByDepart))
+    val statuses = auditableStatuses
+    put("editable", statuses.contains(apply.status))
     val repo = EmsApp.getBlobRepository(true)
     put("attachmentPath", repo.url(apply.attachmentPath))
     forward()
+  }
+
+  private def auditableStatuses: Set[AuditStatus] = {
+    Set(AuditStatus.Submited, AuditStatus.PassedByDepartTrial, AuditStatus.RejectedByDepartTrial, AuditStatus.PassedByDepart, AuditStatus.RejectedByDepart)
   }
 
   def audit(): View = {
@@ -84,4 +90,27 @@ class AuditAction extends RestfulAction[AbilityCreditApply] with ProjectSupport 
     redirect("search", "审批完成")
   }
 
+  /** 批量审核
+   *
+   * @return
+   */
+  def batchAudit(): View = {
+    val applies = entityDao.find(classOf[AbilityCreditApply], getLongIds("apply"))
+    val passed = getBoolean("passed", false)
+    applies foreach { apply =>
+      if (auditableStatuses.contains(apply.status)) {
+        var msg: String = null
+        if (passed) {
+          apply.status = AuditStatus.PassedByDepart
+          msg = s"${Securities.user}审批通过了${apply.std.code}的认定申请"
+        } else {
+          apply.status = AuditStatus.RejectedByDepart
+          msg = s"${Securities.user}驳回了${apply.std.code}的认定申请"
+        }
+        //businessLogger.info(msg, apply.id, Map.empty)
+        entityDao.saveOrUpdate(apply)
+      }
+    }
+    redirect("search", "审批完成")
+  }
 }

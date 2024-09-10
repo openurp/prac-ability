@@ -62,9 +62,9 @@
     </tr>
     [/#if]
   </table>
-  [#if editables?seq_contains(apply.status)]
+  [#if editable]
   [@b.form name="applyForm" action="!audit" theme="list"]
-    [@b.field label="认定学分"]${apply.credits}分[/@]
+    [@b.field label="认定学分"]${apply.credits!}分[/@]
     [@b.radios name="passed" value="1" label="是否同意" required="true" onclick="resetOpinion(this)"/]
     [@b.textarea name="auditOpinion" id="auditOpinion" required="true" rows="4" style="width:80%" label="审核意见" placeholder="请填写意见" value="同意认定"/]
     [@b.formfoot]

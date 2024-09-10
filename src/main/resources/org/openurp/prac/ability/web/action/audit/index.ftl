@@ -8,6 +8,7 @@
           [@b.textfield name="apply.std.code" label="学号"/]
           [@b.textfield name="apply.std.name" label="姓名"/]
           [@b.textfield name="apply.std.state.grade" label="年级"/]
+          [@b.textfield name="apply.std.state.squad.name" label="班级"/]
           [@b.select name="apply.certificate.id" items=certificates label="证书名称" empty="..."/]
           [@b.date label="获得年月" name="apply.acquiredOn"/]
           [@b.select items=statuses label="状态" empty="..." name="apply.status" /]

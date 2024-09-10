@@ -23,7 +23,7 @@ import org.openurp.prac.ability.service.impl.{AbilityCreditApplyServiceImpl, Ext
 class DefaultModule extends BindModule {
 
   override protected def binding(): Unit = {
-    bind(classOf[StdAction])
+    bind(classOf[StdAction], classOf[StdCertAction])
     bind(classOf[AuditAction])
     bind(classOf[AdminAction])
     bind(classOf[MentorAction])

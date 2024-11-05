@@ -18,19 +18,19 @@
 package org.openurp.prac.ability.web.action
 
 import org.beangle.data.dao.OqlBuilder
-import org.beangle.ems.app.EmsApp
+import org.beangle.ems.app.{Ems, EmsApp}
 import org.beangle.ems.app.web.WebBusinessLogger
 import org.beangle.security.Securities
 import org.beangle.web.action.view.View
-import org.beangle.webmvc.support.action.RestfulAction
-import org.openurp.base.model.{AuditStatus, Project}
+import org.beangle.webmvc.support.action.{ExportSupport, RestfulAction}
+import org.openurp.base.model.{AuditStatus, Project, User}
 import org.openurp.code.edu.model.Certificate
 import org.openurp.prac.ability.model.AbilityCreditApply
 import org.openurp.starter.web.support.ProjectSupport
 
 /** 学院审核申请
  */
-class AuditAction extends RestfulAction[AbilityCreditApply] with ProjectSupport {
+class AuditAction extends RestfulAction[AbilityCreditApply], ProjectSupport, ExportSupport[AbilityCreditApply] {
 
   protected override def simpleEntityName: String = "apply"
 
@@ -65,6 +65,9 @@ class AuditAction extends RestfulAction[AbilityCreditApply] with ProjectSupport 
     put("editable", statuses.contains(apply.status))
     val repo = EmsApp.getBlobRepository(true)
     put("attachmentPath", repo.url(apply.attachmentPath))
+    if (apply.persisted) {
+      put("logHref", Ems.api + s"/platform/log/list/${EmsApp.name}/${apply.id}.json")
+    }
     forward()
   }
 
@@ -74,14 +77,15 @@ class AuditAction extends RestfulAction[AbilityCreditApply] with ProjectSupport 
 
   def audit(): View = {
     val apply = getEntity(classOf[AbilityCreditApply], "apply")
+    val auditor = entityDao.findBy(classOf[User], "code", Securities.user).head
     val passed = getBoolean("passed", false)
     var msg: String = null
     if (passed) {
       apply.status = AuditStatus.PassedByDepart
-      msg = s"${Securities.user}审批通过了${apply.std.code}的认定申请"
+      msg = s"${auditor.name}审批通过了${apply.std.code}的认定申请"
     } else {
       apply.status = AuditStatus.RejectedByDepart
-      msg = s"${Securities.user}驳回了${apply.std.code}的认定申请"
+      msg = s"${auditor.name}驳回了${apply.std.code}的认定申请"
     }
 
     apply.auditOpinion = get("auditOpinion")

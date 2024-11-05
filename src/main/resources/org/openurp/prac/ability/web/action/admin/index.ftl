@@ -7,7 +7,7 @@
           <input type="hidden" name="orderBy" value="apply.updatedAt desc"/>
           [@b.textfield name="apply.std.code" label="学号"/]
           [@b.textfield name="apply.std.name" label="姓名"/]
-          [@b.textfield name="apply.std.state.grade" label="年级"/]
+          [@b.textfield name="apply.std.state.grade.code" label="年级"/]
           [@b.date label="考试日期" name="apply.acquiredOn"/]
           [@b.select items=statuses label="状态" empty="..." name="apply.status"/]
       [/@]

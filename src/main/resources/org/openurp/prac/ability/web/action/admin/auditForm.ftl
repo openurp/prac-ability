@@ -46,6 +46,36 @@
     </tr>
     [/#if]
   </table>
+  [#if logHref??]
+  <table id="logs" class="grid-table">
+    <thead class="grid-head">
+      <tr>
+        <th style="width: 15%;">操作人</th>
+        <th>操作内容</th>
+        <th style="width: 18%;">操作时间</th>
+        <th style="width: 10%;">IP</th>
+        <th style="width: 20%;">浏览器</th>
+      </tr>
+    </thead>
+    <tbody class="grid-body">
+    </tbody>
+  </table>
+  <script>
+  jQuery.ajax({
+    url: "${logHref}",
+    headers:{"Accept":"application/json"},
+    [#noparse]
+    success:function (datas){
+       var tbody = jQuery("#logs tbody");
+       for(var i in datas){
+         var data = datas[i];
+         tbody.append(`<tr><td>${data.operator}</td><td>${data.summary}</td><td>${data.operateAt}</td><td>${data.ip}</td><td>${data.agent}</td></tr>`);
+       }
+    }
+    [/#noparse]
+  });
+  </script>
+  [/#if]
   [#if editables?seq_contains(apply.status)]
   [@b.form name="applyForm" action="!audit" theme="list"]
     [@b.radios name="passed" value="1" label="是否同意" required="true"/]

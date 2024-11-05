@@ -24,7 +24,7 @@ import org.beangle.security.Securities
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.RestfulAction
 import org.openurp.base.hr.model.Staff
-import org.openurp.base.model.{AuditStatus, Project}
+import org.openurp.base.model.{AuditStatus, Project, User}
 import org.openurp.code.edu.model.Certificate
 import org.openurp.prac.ability.model.AbilityCreditApply
 import org.openurp.starter.web.support.ProjectSupport
@@ -81,14 +81,15 @@ class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport
 
   def audit(): View = {
     val apply = getEntity(classOf[AbilityCreditApply], "apply")
+    val auditor = entityDao.findBy(classOf[User], "code", Securities.user).head
     val passed = getBoolean("passed", false)
     var msg: String = null
     if (passed) {
       apply.status = AuditStatus.PassedByDepartTrial
-      msg = s"${Securities.user}审批通过了${apply.std.code}的认定申请"
+      msg = s"${auditor.name}审批通过了${apply.std.code}的认定申请"
     } else {
       apply.status = AuditStatus.RejectedByDepartTrial
-      msg = s"${Securities.user}驳回了${apply.std.code}的认定申请"
+      msg = s"${auditor.name}驳回了${apply.std.code}的认定申请"
     }
 
     apply.auditOpinion = get("auditOpinion")

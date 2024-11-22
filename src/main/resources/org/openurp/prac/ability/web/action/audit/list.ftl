@@ -6,7 +6,8 @@
       bar.addItem("批量同意",action.multi('batchAudit',"确认审核通过？","&passed=1"));
       bar.addItem("批量驳回",action.multi('batchAudit',"确认审核不通过，驳回到学生重修修改?","&passed=0"));
       bar.addItem("${b.text("action.export")}",action.exportData("std.code:学号,std.name:姓名,certificate.name:证书,"+
-                "subjects:证书内课程,std.state.department.name:所属院系,acquiredOn:获得年月,credits:学分,"+
+                "subjects:证书内课程,std.state.major.name:专业,std.state.squad.name:班级,std.state.department.name:所属院系,"+
+                "acquiredOn:获得年月,credits:学分,"+
                 "status:状态,updatedAt:提交时间",
                 null,'fileName=证书列表'));
     [/@]

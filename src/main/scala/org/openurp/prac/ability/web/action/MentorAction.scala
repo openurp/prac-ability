@@ -37,7 +37,7 @@ class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport
 
   var businessLogger: WebBusinessLogger = _
 
-  private val statuses = List(AuditStatus.Submited, AuditStatus.PassedByDepartTrial, AuditStatus.RejectedByDepartTrial)
+  private val statuses = List(AuditStatus.Submited, AuditStatus.PassedByDepartTrial, AuditStatus.RejectedByDepartTrial,AuditStatus.Rejected)
 
   override protected def indexSetting(): Unit = {
     put("statuses", statuses)
@@ -56,14 +56,14 @@ class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport
     query.where("apply.std.project=:project", project)
     query.where("apply.status in :statusList", statuses)
     val departs = getDeparts
-    if(departs.isEmpty){
+    if (departs.isEmpty) {
       val staffs = entityDao.findBy(classOf[Staff], "code" -> Securities.user, "school" -> project.school)
       if staffs.isEmpty then query.where("apply.id <0")
       else query.where("apply.std.state.squad.mentor=:mentor", staffs.head)
-    }else{
+    } else {
       query.where("apply.std.state.department in(:departs)", departs)
     }
-     query
+    query
   }
 
   def auditForm(): View = {
@@ -76,7 +76,7 @@ class MentorAction extends RestfulAction[AbilityCreditApply] with ProjectSupport
   }
 
   private def auditableStatuses: Set[AuditStatus] = {
-    Set(AuditStatus.Submited, AuditStatus.PassedByDepartTrial, AuditStatus.RejectedByDepartTrial)
+    Set(AuditStatus.Submited, AuditStatus.PassedByDepartTrial, AuditStatus.RejectedByDepartTrial, AuditStatus.Rejected)
   }
 
   def audit(): View = {

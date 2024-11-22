@@ -18,8 +18,8 @@
 package org.openurp.prac.ability.web.action
 
 import org.beangle.data.dao.OqlBuilder
-import org.beangle.ems.app.{Ems, EmsApp}
 import org.beangle.ems.app.web.WebBusinessLogger
+import org.beangle.ems.app.{Ems, EmsApp}
 import org.beangle.security.Securities
 import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.{ExportSupport, RestfulAction}
@@ -36,7 +36,7 @@ class AuditAction extends RestfulAction[AbilityCreditApply], ProjectSupport, Exp
 
   var businessLogger: WebBusinessLogger = _
 
-  private val statuses = List(AuditStatus.PassedByDepartTrial, AuditStatus.PassedByDepart, AuditStatus.RejectedByDepart, AuditStatus.Passed)
+  private val statuses = List(AuditStatus.PassedByDepartTrial, AuditStatus.PassedByDepart, AuditStatus.RejectedByDepart, AuditStatus.Rejected, AuditStatus.Passed)
 
   override protected def indexSetting(): Unit = {
     put("statuses", statuses)

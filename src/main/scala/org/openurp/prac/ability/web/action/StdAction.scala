@@ -46,7 +46,8 @@ class StdAction extends StudentSupport with EntityAction[AbilityCreditApply] {
     val paths = applies.map(x => (x, repo.url(x.attachmentPath)))
     put("attachmentPaths", paths.toMap)
 
-    put("editables", Set(AuditStatus.Draft, AuditStatus.Submited, AuditStatus.Rejected, AuditStatus.RejectedByDepart))
+    put("editables", Set(AuditStatus.Draft, AuditStatus.Submited, AuditStatus.Rejected, AuditStatus.RejectedByDepartTrial,
+      AuditStatus.RejectedByDepart))
 
     val configQuery = OqlBuilder.from(classOf[AbilityCreditConfig], "config")
     configQuery.where("config.project=:project", student.project)

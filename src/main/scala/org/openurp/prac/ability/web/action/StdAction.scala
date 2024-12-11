@@ -22,11 +22,12 @@ import org.beangle.commons.lang.Strings
 import org.beangle.data.dao.OqlBuilder
 import org.beangle.ems.app.EmsApp
 import org.beangle.ems.app.web.WebBusinessLogger
-import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.EntityAction
+import org.beangle.webmvc.view.View
 import org.openurp.base.model.{AuditStatus, Project}
 import org.openurp.base.std.model.Student
-import org.openurp.prac.ability.model.{AbilityCreditApply, AbilityCreditConfig, AbilityCreditSetting}
+import org.openurp.prac.ability.config.{AbilityCreditConfig, AbilityCreditSetting}
+import org.openurp.prac.ability.model.AbilityCreditApply
 import org.openurp.starter.web.support.StudentSupport
 
 import java.time.{Instant, LocalDate}

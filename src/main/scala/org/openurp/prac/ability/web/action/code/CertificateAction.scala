@@ -22,10 +22,10 @@ import org.beangle.data.dao.OqlBuilder
 import org.beangle.doc.excel.schema.ExcelSchema
 import org.beangle.doc.transfer.importer.ImportSetting
 import org.beangle.doc.transfer.importer.listener.ForeignerListener
-import org.beangle.web.action.annotation.response
-import org.beangle.web.action.view.Stream
+import org.beangle.webmvc.annotation.response
 import org.beangle.webmvc.support.action.{ImportSupport, RestfulAction}
 import org.beangle.webmvc.support.helper.QueryHelper
+import org.beangle.webmvc.view.Stream
 import org.openurp.code.edu.model.{Certificate, CertificateCategory}
 import org.openurp.code.service.CodeService
 import org.openurp.prac.ability.web.helper.CertificateImportListener
@@ -61,7 +61,7 @@ class CertificateAction extends RestfulAction[Certificate], ImportSupport[Certif
     sheet.add("证书内课程", "certificate.subjects").length(500)
     val os = new ByteArrayOutputStream()
     schema.generate(os)
-    Stream(new ByteArrayInputStream(os.toByteArray), MediaTypes.ApplicationXlsx.toString, "证书模板.xlsx")
+    Stream(new ByteArrayInputStream(os.toByteArray), MediaTypes.ApplicationXlsx, "证书模板.xlsx")
   }
 
   protected override def configImport(setting: ImportSetting): Unit = {

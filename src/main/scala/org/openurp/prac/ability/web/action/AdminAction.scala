@@ -18,11 +18,11 @@
 package org.openurp.prac.ability.web.action
 
 import org.beangle.data.dao.OqlBuilder
-import org.beangle.ems.app.{Ems, EmsApi, EmsApp}
 import org.beangle.ems.app.web.WebBusinessLogger
+import org.beangle.ems.app.{Ems, EmsApi, EmsApp}
 import org.beangle.security.Securities
-import org.beangle.web.action.view.View
 import org.beangle.webmvc.support.action.{ExportSupport, RestfulAction}
+import org.beangle.webmvc.view.View
 import org.openurp.base.model.AuditStatus
 import org.openurp.prac.ability.model.AbilityCreditApply
 import org.openurp.prac.ability.service.AbilityCreditApplyService
@@ -59,8 +59,8 @@ class AdminAction extends RestfulAction[AbilityCreditApply], ProjectSupport, Exp
     put("editables", statuses)
     val repo = EmsApp.getBlobRepository(true)
     put("attachmentPath", repo.url(apply.attachmentPath))
-    if(apply.persisted){
-      put("logHref",Ems.api+s"/platform/log/list/${EmsApp.name}/${apply.id}.json")
+    if (apply.persisted) {
+      put("logHref", Ems.api + s"/platform/log/list/${EmsApp.name}/${apply.id}.json")
     }
     forward()
   }

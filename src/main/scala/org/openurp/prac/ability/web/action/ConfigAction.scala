@@ -18,11 +18,11 @@
 package org.openurp.prac.ability.web.action
 
 import org.beangle.data.dao.OqlBuilder
-import org.beangle.web.action.annotation.ignore
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.annotation.ignore
 import org.beangle.webmvc.support.action.RestfulAction
+import org.beangle.webmvc.view.View
 import org.openurp.code.edu.model.EducationLevel
-import org.openurp.prac.ability.model.AbilityCreditConfig
+import org.openurp.prac.ability.config.AbilityCreditConfig
 import org.openurp.starter.web.support.ProjectSupport
 
 class ConfigAction extends RestfulAction[AbilityCreditConfig] with ProjectSupport {

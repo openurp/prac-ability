@@ -21,7 +21,7 @@ import jakarta.servlet.http.Part
 import org.beangle.commons.lang.Strings
 import org.beangle.ems.app.EmsApp
 import org.beangle.ems.app.web.WebBusinessLogger
-import org.beangle.web.action.view.View
+import org.beangle.webmvc.view.View
 import org.beangle.webmvc.support.action.EntityAction
 import org.openurp.base.model.{AuditStatus, Project}
 import org.openurp.base.std.model.Student

@@ -21,7 +21,8 @@ import org.beangle.data.dao.{EntityDao, OqlBuilder}
 import org.openurp.base.edu.model.Course
 import org.openurp.base.model.AuditStatus.{Passed, Rejected}
 import org.openurp.base.std.model.Student
-import org.openurp.prac.ability.model.{AbilityCredit, AbilityCreditApply, AbilityCreditConfig}
+import org.openurp.prac.ability.config.AbilityCreditConfig
+import org.openurp.prac.ability.model.{AbilityCredit, AbilityCreditApply}
 import org.openurp.prac.ability.service.{AbilityCreditApplyService, ExternCourseGradeSyncService}
 
 import java.time.Instant

@@ -22,7 +22,7 @@ import org.beangle.data.dao.EntityDao
 import org.beangle.doc.transfer.importer.{ImportListener, ImportResult}
 import org.openurp.base.edu.model.Major
 import org.openurp.base.model.Department
-import org.openurp.prac.ability.model.{AbilityCreditConfig, AbilityCreditSetting}
+import org.openurp.prac.ability.config.{AbilityCreditConfig, AbilityCreditSetting}
 
 class SettingImportListener(config: AbilityCreditConfig, entityDao: EntityDao) extends ImportListener {
 

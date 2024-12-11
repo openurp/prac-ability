@@ -17,7 +17,7 @@
 
 package org.openurp.prac.ability.web.action
 
-import org.beangle.cdi.bind.BindModule
+import org.beangle.commons.cdi.BindModule
 import org.openurp.prac.ability.service.impl.{AbilityCreditApplyServiceImpl, ExternCourseGradeSyncServiceImpl}
 
 class DefaultModule extends BindModule {

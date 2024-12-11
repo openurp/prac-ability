@@ -22,14 +22,14 @@ import org.beangle.doc.excel.schema.ExcelSchema
 import org.beangle.doc.transfer.importer.ImportSetting
 import org.beangle.doc.transfer.importer.listener.ForeignerListener
 import org.beangle.ems.app.Ems
-import org.beangle.web.action.annotation.{ignore, response}
-import org.beangle.web.action.view.{Stream, View}
+import org.beangle.webmvc.annotation.{ignore, response}
 import org.beangle.webmvc.support.action.{ImportSupport, RestfulAction}
+import org.beangle.webmvc.view.{Stream, View}
 import org.openurp.base.edu.model.Major
 import org.openurp.base.model.Department
 import org.openurp.code.edu.model.Certificate
 import org.openurp.code.service.CodeService
-import org.openurp.prac.ability.model.{AbilityCreditConfig, AbilityCreditSetting}
+import org.openurp.prac.ability.config.{AbilityCreditConfig, AbilityCreditSetting}
 import org.openurp.prac.ability.web.helper.{CertificateImportListener, SettingImportListener}
 
 import java.io.{ByteArrayInputStream, ByteArrayOutputStream}
@@ -90,7 +90,7 @@ class SettingAction extends RestfulAction[AbilityCreditSetting], ImportSupport[A
     sheet.add("备注", "setting.remark").length(100)
     val os = new ByteArrayOutputStream()
     schema.generate(os)
-    Stream(new ByteArrayInputStream(os.toByteArray), MediaTypes.ApplicationXlsx.toString, "认定设置.xlsx")
+    Stream(new ByteArrayInputStream(os.toByteArray), MediaTypes.ApplicationXlsx, "认定设置.xlsx")
   }
 
   protected override def configImport(setting: ImportSetting): Unit = {

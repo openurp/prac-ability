@@ -18,15 +18,18 @@
            <a href="javascript:void(0)" onclick="singleAudit(this)" title="点击进入审批">${apply.std.name}</a>
         [/@]
         [@b.col property="std.state.grade.code" title="年级" width="6%"/]
+        [@b.col property="std.state.department.name" title="学院" width="6%"]
+          ${apply.std.state.department.shortName!apply.std.state.department.name}
+        [/@]
         [@b.col property="certificate.name" title="证书" width="22%"/]
         [@b.col property="subjects" title="证书内课程"/]
         [@b.col property="std.state.squad.name" title="班级" width="12%"]
           <div class="text-ellipsis">${(apply.std.state.squad.name)!}</div>
         [/@]
-        [@b.col property="acquiredOn" title="获得年月" width="7%"]${(apply.acquiredOn?string("yyyy-MM"))!"--"}[/@]
-        [@b.col title="学分" property="credits" sortable="false" width="6%"/]
+        [@b.col property="acquiredOn" title="获得年月" width="6%"]${(apply.acquiredOn?string("yyyy-MM"))!"--"}[/@]
+        [@b.col title="学分" property="credits" sortable="false" width="4%"/]
         [@b.col property="status" title="状态" width="9%"]${apply.status}[/@]
-        [@b.col property="updatedAt" title="提交时间" width="9%"]${apply.updatedAt?string("yy-MM-dd HH:mm")}[/@]
+        [@b.col property="updatedAt" title="提交时间" width="7%"]${apply.updatedAt?string("MM-dd HH:mm")}[/@]
     [/@]
 [/@]
 <script>

@@ -21,8 +21,8 @@ import org.beangle.data.dao.OqlBuilder
 import org.beangle.ems.app.web.WebBusinessLogger
 import org.beangle.ems.app.{Ems, EmsApp}
 import org.beangle.security.Securities
-import org.beangle.webmvc.view.View
 import org.beangle.webmvc.support.action.{ExportSupport, RestfulAction}
+import org.beangle.webmvc.view.View
 import org.openurp.base.model.{AuditStatus, Project, User}
 import org.openurp.code.edu.model.Certificate
 import org.openurp.prac.ability.model.AbilityCreditApply
@@ -45,6 +45,7 @@ class AuditAction extends RestfulAction[AbilityCreditApply], ProjectSupport, Exp
 
     put("certificates", codeService.get(classOf[Certificate]))
     put("levels", project.levels)
+    put("departs", getDeparts)
     super.indexSetting()
   }
 

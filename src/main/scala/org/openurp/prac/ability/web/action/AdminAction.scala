@@ -23,7 +23,7 @@ import org.beangle.ems.app.{Ems, EmsApi, EmsApp}
 import org.beangle.security.Securities
 import org.beangle.webmvc.support.action.{ExportSupport, RestfulAction}
 import org.beangle.webmvc.view.View
-import org.openurp.base.model.AuditStatus
+import org.openurp.base.model.{AuditStatus, Project}
 import org.openurp.prac.ability.model.AbilityCreditApply
 import org.openurp.prac.ability.service.AbilityCreditApplyService
 import org.openurp.starter.web.support.ProjectSupport
@@ -43,6 +43,10 @@ class AdminAction extends RestfulAction[AbilityCreditApply], ProjectSupport, Exp
 
   override protected def indexSetting(): Unit = {
     put("statuses", statuses)
+
+    given project: Project = getProject
+
+    put("departs", getDeparts)
     super.indexSetting()
   }
 

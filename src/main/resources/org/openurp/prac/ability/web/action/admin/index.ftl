@@ -8,6 +8,7 @@
           [@b.textfield name="apply.std.code" label="学号"/]
           [@b.textfield name="apply.std.name" label="姓名"/]
           [@b.textfield name="apply.std.state.grade.code" label="年级"/]
+          [@b.select name="apply.std.state.department.id" label="学院" items=departs empty="..."/]
           [@b.date label="考试日期" name="apply.acquiredOn"/]
           [@b.select items=statuses label="状态" empty="..." name="apply.status"/]
       [/@]

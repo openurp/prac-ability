@@ -30,7 +30,7 @@ import org.openurp.prac.ability.config.{AbilityCreditConfig, AbilityCreditSettin
 import org.openurp.prac.ability.model.AbilityCreditApply
 import org.openurp.starter.web.support.StudentSupport
 
-import java.time.{Instant, LocalDate}
+import java.time.{Instant, YearMonth}
 
 class StdAction extends StudentSupport with EntityAction[AbilityCreditApply] {
 
@@ -38,7 +38,7 @@ class StdAction extends StudentSupport with EntityAction[AbilityCreditApply] {
 
   protected override def projectIndex(student: Student): View = {
     //2021级及其之前的只需要登记
-    val displayCredits = student.grade.beginOn.isAfter(LocalDate.parse("2022-07-01"))
+    val displayCredits = student.grade.beginIn.isAfter(YearMonth.parse("2022-07"))
     if !displayCredits then return redirect(to(classOf[StdCertAction], "index"), "")
 
     val applies = entityDao.findBy(classOf[AbilityCreditApply], "std", student)
@@ -115,7 +115,7 @@ class StdAction extends StudentSupport with EntityAction[AbilityCreditApply] {
   }
 
   private def getConvertCredits(std: Student, apply: AbilityCreditApply, setting: AbilityCreditSetting): Option[Float] = {
-    if (std.grade.beginOn.isAfter(LocalDate.parse("2022-07-01"))) {
+    if (std.grade.beginIn.isAfter(YearMonth.parse("2022-07"))) {
       if (apply.finished) Some(1.0f) else Some(0.5f)
     } else {
       None

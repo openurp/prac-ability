@@ -10,7 +10,7 @@
           [@b.textfield name="apply.std.state.grade.code" label="年级"/]
           [@b.textfield name="apply.std.state.squad.name" label="班级"/]
           [@b.select name="apply.certificate.id" items=certificates label="证书名称" empty="..."/]
-          [@b.date label="获得年月" name="apply.acquiredOn"/]
+          [@b.date label="获得年月" name="apply.acquiredIn"/]
           [@b.select items=statuses label="状态" empty="..." name="apply.status"/]
       [/@]
   </div>

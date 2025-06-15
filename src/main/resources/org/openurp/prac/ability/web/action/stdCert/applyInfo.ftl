@@ -11,7 +11,7 @@
     </tr>
     <tr>
       <td class="title">获得年月：</td>
-      <td>${apply.acquiredOn}</td>
+      <td>${apply.acquiredIn}</td>
       <td class="title">证书编号：</td>
       <td>${apply.certificateNo!}</td>
       <td class="title">认定范围：</td>

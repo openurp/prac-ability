@@ -23,7 +23,7 @@
         [@b.radios label="认定范围" name="apply.finished" items=scope value=apply.finished required="true" /]
         [@b.textfield name="apply.subjects" maxlength="100" label="通过课程" required="true" value=apply.subjects!
            style="width:200px" comment=setting.certificate.subjects placeholder="全部完成可以填写全部"/]
-        [@b.date label="获得年月" name="apply.acquiredOn" value=apply.acquiredOn! required="true" format="yyyy-MM"
+        [@b.date label="获得年月" name="apply.acquiredIn" value=apply.acquiredIn! required="true" format="yyyy-MM"
                placeholder="证书课程获得年月/证书获得年月" comment="证书课程获得年月/证书获得年月" /]
         [#if setting.certificate.subjects??]
           [@b.textfield name="apply.certificateNo" label="证书编号" value=apply.certificateNo! maxlength="100" required="false" comment="按照课程认定时选填"/]

@@ -5,7 +5,7 @@
 [#assign std= apply.std/]
 [@b.card class="card-info card-outline"]
   [@b.card_header]
-    <i class="fas fa-school"></i>&nbsp;${apply.certificate.name}<span style="font-size:0.8em">(${apply.acquiredOn?string("yyyy-MM")})</span>
+    <i class="fas fa-school"></i>&nbsp;${apply.certificate.name}<span style="font-size:0.8em">(${apply.acquiredIn?string("yyyy-MM")})</span>
   [/@]
 
   <table class="infoTable">
@@ -35,7 +35,7 @@
     </tr>
     <tr>
       <td class="title">获得年月：</td>
-      <td>${apply.acquiredOn?string("yyyy-MM")}</td>
+      <td>${apply.acquiredIn?string("yyyy-MM")}</td>
       <td class="title">证书编号：</td>
       <td>${apply.certificateNo!}</td>
       <td class="title">认定范围：</td>

@@ -18,7 +18,7 @@
         [@b.col property="std.state.squad.name" title="班级" width="12%"]
           <div class="text-ellipsis">${(apply.std.state.squad.name)!}</div>
         [/@]
-        [@b.col property="acquiredOn" title="获得年月" width="8%"]${(apply.acquiredOn?string("yyyy-MM"))!"--"}[/@]
+        [@b.col property="acquiredIn" title="获得年月" width="8%"]${(apply.acquiredIn?string("yyyy-MM"))!"--"}[/@]
         [@b.col title="学分" property="credits" width="6%"/]
         [@b.col property="status" title="状态" width="8%"]${apply.status}[/@]
         [@b.col property="updatedAt" title="提交时间" width="10%"]${apply.updatedAt?string("yy-MM-dd HH:mm")}[/@]

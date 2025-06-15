@@ -56,6 +56,10 @@ class AuditAction extends RestfulAction[AbilityCreditApply], ProjectSupport, Exp
     query.where("apply.std.project=:project", project)
     query.where("apply.status in :statusList", statuses)
     query.where("apply.auditDepart in(:departs)", getDeparts)
+
+    getInt("acquiredYear") foreach { year =>
+      query.where("year(apply.acquiredIn) = :year", year)
+    }
     query
   }
 

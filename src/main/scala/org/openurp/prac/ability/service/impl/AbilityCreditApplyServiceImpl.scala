@@ -20,16 +20,20 @@ package org.openurp.prac.ability.service.impl
 import org.beangle.data.dao.{EntityDao, OqlBuilder}
 import org.openurp.base.edu.model.Course
 import org.openurp.base.model.AuditStatus.{Passed, Rejected}
-import org.openurp.base.std.model.Student
+import org.openurp.base.model.Project
+import org.openurp.base.std.model.{Grade, Student}
+import org.openurp.edu.program.model.{MajorPlanCourse, Program}
 import org.openurp.prac.ability.config.AbilityCreditConfig
 import org.openurp.prac.ability.model.{AbilityCredit, AbilityCreditApply}
 import org.openurp.prac.ability.service.{AbilityCreditApplyService, ExternCourseGradeSyncService}
 
-import java.time.Instant
+import java.time.{Instant, LocalDate}
 
 class AbilityCreditApplyServiceImpl extends AbilityCreditApplyService {
 
   var entityDao: EntityDao = _
+
+  var courseName: String = "能力素质拓展课"
 
   var externCourseGradeSyncService: Option[ExternCourseGradeSyncService] = None
 
@@ -54,7 +58,7 @@ class AbilityCreditApplyServiceImpl extends AbilityCreditApplyService {
     val q = OqlBuilder.from(classOf[Course], "c")
     q.where("c.project=:project", std.project)
     q.where("c.department=:depart", std.department)
-    q.where("c.name=:name", "能力素质拓展课")
+    q.where("c.name=:name", courseName)
     q.where("c.defaultCredits=:credits", requiredCredits)
     entityDao.search(q).head
   }
@@ -84,4 +88,30 @@ class AbilityCreditApplyServiceImpl extends AbilityCreditApplyService {
     abilityCredit
   }
 
+  override def init(project: Project, grade: Grade): Unit = {
+    val q = OqlBuilder.from[Program](classOf[MajorPlanCourse].getName, "mpc")
+    q.where("mpc.group.plan.program.project=:project", project)
+    q.where("mpc.group.plan.program.grade=:grade", grade)
+    q.where("mpc.course.name=:name", courseName)
+    q.select("distinct mpc.group.plan.program")
+    val programs = entityDao.search(q)
+    val required = programs.map(x => (x.level, x.department, x.major))
+    if (programs.nonEmpty) {
+      val q1 = OqlBuilder.from(classOf[Student], "std")
+      q1.where("std.project = :project", project)
+      q1.where("std.registed=true")
+      q1.where("std.state.grade=:grade", grade)
+      q1.where(s"not exists(from ${classOf[AbilityCredit].getName} c where c.std=std)")
+      q1.where(":today between std.beginOn and std.endOn", LocalDate.now)
+      val stds = entityDao.search(q1)
+      val requiredStds = stds.filter(std => required.contains((std.level, std.department, std.major)))
+      val newCredits = requiredStds.map { std =>
+        val credit = new AbilityCredit(std)
+        credit.updatedAt = Instant.now
+        credit.credits = 0f
+        credit
+      }
+      if (newCredits.nonEmpty) entityDao.saveOrUpdate(newCredits)
+    }
+  }
 }

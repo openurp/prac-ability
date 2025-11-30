@@ -17,6 +17,8 @@
 
 package org.openurp.prac.ability.service
 
+import org.openurp.base.model.Project
+import org.openurp.base.std.model.Grade
 import org.openurp.prac.ability.model.AbilityCreditApply
 
 trait AbilityCreditApplyService {
@@ -25,4 +27,5 @@ trait AbilityCreditApplyService {
 
   def reject(apply: AbilityCreditApply): Unit
 
+  def init(project: Project, grade: Grade): Unit
 }

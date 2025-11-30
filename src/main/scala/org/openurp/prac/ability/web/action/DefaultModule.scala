@@ -29,6 +29,8 @@ class DefaultModule extends BindModule {
     bind(classOf[MentorAction])
     bind(classOf[ConfigAction])
     bind(classOf[SettingAction])
+    bind(classOf[CreditAction])
+    bind(classOf[SquadAction])
 
     bind(classOf[code.CategoryAction])
     bind(classOf[code.CertificateAction])

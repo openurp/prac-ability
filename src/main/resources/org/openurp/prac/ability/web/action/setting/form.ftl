@@ -12,7 +12,7 @@
     [@b.select name="depart.id" label="适用学院" items=project.departments multiple="true"  values=setting.departs empty="..." required="false"/]
     [@b.select name="major.id" label="适用专业" items=majors multiple="true"  values=setting.majors empty="..." required="false"/]
 
-    [@b.number name="setting.credits" label="学分数"  value=setting.credits  required="true"/]
+    [@b.textfield name="setting.credits" label="学分数"  value=setting.credits  required="true"/]
     [@b.textarea name="setting.remark" label="额外说明" value=setting.remark! maxLength="200" style="width:400px" rows="4"/]
     [@b.formfoot]
         <input type="hidden" name="setting.config.id" value="${(setting.config.id)!}"/>

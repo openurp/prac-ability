@@ -1,0 +1,12 @@
+[@b.grid items=credits var="credit" theme="mini"]
+    [@b.row]
+        [@b.col property="std.code" title="学号" width="13%"/]
+        [@b.col property="std.name" title="姓名" width="12%"]
+           ${credit.std.name}
+        [/@]
+        [@b.col title="培养层次" property="std.level.name" width="10%"/]
+        [@b.col title="专业" property="std.state.major.name" width="15%"/]
+        [@b.col title="班级" property="std.state.squad.name"/]
+        [@b.col title="学分" property="credits" width="6%"/]
+    [/@]
+[/@]

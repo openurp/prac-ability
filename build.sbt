@@ -1,7 +1,7 @@
 import org.openurp.parent.Settings.*
 
 ThisBuild / organization := "org.openurp.prac.ability"
-ThisBuild / version := "0.0.2-SNAPSHOT"
+ThisBuild / version := "0.0.2"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
@@ -22,10 +22,10 @@ ThisBuild / developers := List(
 ThisBuild / description := "OpenURP Prac Ability"
 ThisBuild / homepage := Some(url("http://openurp.github.io/prac-ability/index.html"))
 
-val apiVer = "0.44.0"
-val starterVer = "0.3.58"
-val baseVer = "0.4.51-SNAPSHOT"
-val eduCoreVer = "0.3.11"
+val apiVer = "0.48.2"
+val starterVer = "0.4.8"
+val baseVer = "0.4.63"
+val eduCoreVer = "0.4.3"
 
 val openurp_edu_api = "org.openurp.edu" % "openurp-edu-api" % apiVer
 val openurp_prac_api = "org.openurp.prac" % "openurp-prac-api" % apiVer

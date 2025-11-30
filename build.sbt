@@ -1,7 +1,11 @@
 import org.openurp.parent.Settings.*
 
 ThisBuild / organization := "org.openurp.prac.ability"
-ThisBuild / version := "0.0.3-SNAPSHOT"
+<<<<<<< HEAD
+ThisBuild / version := "0.0.4-SNAPSHOT-SNAPSHOT"
+=======
+ThisBuild / version := "0.0.4-SNAPSHOT"
+>>>>>>> develop
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
